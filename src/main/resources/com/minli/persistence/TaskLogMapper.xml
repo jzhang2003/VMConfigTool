@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.minli.persistence.TaskLogMapper"> 
+	  <resultMap id="TaskLogResultMap" type="com.minli.persistence.TaskLog">
+    	<id property="taskLogId" column="TASK_LOG_ID" />
+    	<id property="taskStatus" column="TASK_STATUS" />
+     	<id property="logData" column="LOG_DATA" />
+    	<id property="errorMessage" column="ERROR_MESSAGE" />    	   	
+    	<id property="creationDate" column="CREATION_DATE" />   	
+   	</resultMap>
+	
+    <insert id="insertTaskLog" parameterType="com.minli.persistence.TaskLog" useGeneratedKeys="true" keyProperty="taskLogId"> 
+       insert into TASK_LOG (
+        TASK_STATUS,
+       	LOG_DATA,
+       	ERROR_MESSAGE,
+       	CREATION_DATE) 
+       	values(
+       	#{taskStatus},
+       	#{logData},
+       	#{errorMessage},
+       	#{creationDate}) 
+    </insert> 
+    
+    <update id="updateTaskLog" parameterType="com.minli.persistence.TaskLog">
+    	update TASK_LOG set
+    		TASK_STATUS = #{taskStatus},
+    		LOG_DATA = #{logData},
+    		ERROR_MESSAGE = #{errorMessage},   		
+    		CREATION_DATE = #{creationDate}
+    	where TASK_LOG_ID = #{taskLogId}
+    </update>
+    			
+    
+    <delete id="deleteTaskLogById" parameterType="long"> 
+       delete from TASK_LOG where TASK_LOG_ID=#{taskLogId}   
+    </delete> 
+    
+
+    <select id="getTaskLogById" resultType="com.minli.persistence.TaskLog" parameterType="long" resultMap="TaskLogResultMap"> 
+        select * from TASK_LOG where TASK_LOG_ID=#{taskLogId} 
+    </select> 
+    
+
+    
+    <select id="getAllTaskLog" resultType="com.minli.persistence.TaskLog" resultMap="TaskLogResultMap"> 
+        select * from TASK_LOG where 1=1
+    </select> 
+    
+    
+</mapper> 

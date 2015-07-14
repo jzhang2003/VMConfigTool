@@ -3,6 +3,8 @@ package com.minli.web.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.minli.persistence.TaskLog;
+import com.minli.persistence.TaskLogBOF;
 import com.minli.web.form.SearchMainForm;
 
 	@Controller
@@ -38,6 +42,7 @@ import com.minli.web.form.SearchMainForm;
 
 			 
 			 BufferedReader br = null;
+			 StringBuilder sb = new StringBuilder();
 			 
 			 try {
 //				Process p = Runtime.getRuntime().exec("cmd.exe /c ipconfig /all");
@@ -47,12 +52,34 @@ import com.minli.web.form.SearchMainForm;
                 String line = null;
                 while ((line = br.readLine()) != null) {
        			 logger.info(line);
+       			sb.append(line);
                 }
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			 
+				TaskLogBOF bof = TaskLogBOF.getInstance();
+				TaskLog taskLog = new TaskLog();
+				taskLog.setLogData(sb.toString());
+				taskLog.setErrorMessage("no error");
+				taskLog.setCreationDate(new Date());
+				taskLog.setTaskStatus(1);
+				try {
+					bof.insertTaskLog(taskLog);
+					TaskLog getLog = bof.getTaskLogById(1000000002L);
+					formModel.setPassword(getLog.getLogData());
+					
+					
+					List<TaskLog> taskLogList = bof.getAllTaskLog();
+				    mv.addObject("taskLogList", taskLogList);	
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
 
 
 			 

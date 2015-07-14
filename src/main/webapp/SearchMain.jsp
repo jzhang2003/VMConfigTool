@@ -1,6 +1,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.minli.web.form.SearchMainForm"%>
+<%@ page import="com.minli.persistence.*"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +12,8 @@
 String strOutputUserName= request.getParameter("userName");
 String strOutputPassword = request.getParameter("password");
 String strOutputConfMode = request.getParameter("confMode");
+List<TaskLog> taskLogList = (List<TaskLog>)request.getAttribute("taskLogList");
+
 %>
 
    <link href="./css/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -99,9 +103,46 @@ String strOutputConfMode = request.getParameter("confMode");
 	<label>${userName} ${password} ${confMode}</label>
 	<label>${resultStr}</label>
 	
+	
+	      <div>
+      <br/>
+           	<table class="table table-bordered table-striped table-hover table-condensed" id = "apiErrortable">
+      		<thead>
+      			<tr class="success">
+      				<th>TaskId</th>
+      				<th>TaskStatus</th>
+      				<th>LogData</th>
+      			</tr>
+      		<thead>
+      
+      		 <tbody>
+           <c:forEach items="${taskLogList}" var="taskLogForm">
+           
+      			<tr>
+      				<td>${taskLogForm.taskLogId}</td>
+      				 <td>${taskLogForm.taskStatus}</td>
+      				
+      				<td>${taskLogForm.logData}</td>
+      			</tr>    
+			 </c:forEach>
+			 </tbody>
+      
+      	</table>
+      </div>   
+	
+	
 </div>
 
 
+
+
+<script type="text/javascript">
+
+
+
+
+
+</script>
 
 </body>
 </html>

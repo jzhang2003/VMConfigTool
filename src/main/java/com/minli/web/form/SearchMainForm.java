@@ -1,9 +1,14 @@
 package com.minli.web.form;
 
+import java.util.List;
+
+import com.minli.persistence.TaskLog;
+
 public class SearchMainForm {
 	private String userName;
 	private String password;
 	private String confMode;
+	
 	public String getUserName() {
 		return userName;
 	}
