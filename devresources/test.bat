@@ -1,5 +1,5 @@
 @echo off
 
-echo 您输入了参数username = %1%
-echo 您输入了参数password = %2%
-echo 您输入了参数confMode = %3%
+echo username = %1%
+echo password = %2%
+echo confMode = %3%

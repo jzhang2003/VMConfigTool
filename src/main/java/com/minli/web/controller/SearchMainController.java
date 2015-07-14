@@ -41,7 +41,7 @@ import com.minli.web.form.SearchMainForm;
 			 
 			 try {
 //				Process p = Runtime.getRuntime().exec("cmd.exe /c ipconfig /all");
-				Process p = Runtime.getRuntime().exec("f:/test.bat " + parm1 + " " + parm2 + " " + parm3);
+				Process p = Runtime.getRuntime().exec("c:/workspace/VMConfigTool/devresources/test.bat " + parm1 + " " + parm2 + " " + parm3);
 				
 				br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line = null;
