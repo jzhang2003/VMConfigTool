@@ -52,7 +52,7 @@ import com.minli.web.form.SearchMainForm;
                 String line = null;
                 while ((line = br.readLine()) != null) {
        			 logger.info(line);
-       			sb.append(line);
+       			sb.append(line + "\r\n" + "<br/>");
                 }
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
