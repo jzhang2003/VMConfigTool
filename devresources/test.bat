@@ -3,4 +3,4 @@
 echo username = %1%
 echo password = %2%
 echo confMode = %3%
-ipconfig/all
+powershell C:\workspace\VMConfigTool\devresources\myscript.ps1

@@ -46,8 +46,10 @@ import com.minli.web.form.SearchMainForm;
 			 
 			 try {
 //				Process p = Runtime.getRuntime().exec("cmd.exe /c ipconfig /all");
-				Process p = Runtime.getRuntime().exec("c:/workspace/VMConfigTool/devresources/test.bat " + parm1 + " " + parm2 + " " + parm3);
-				
+//				Process p = Runtime.getRuntime().exec("c:/workspace/VMConfigTool/devresources/test.bat " + parm1 + " " + parm2 + " " + parm3);
+				String cmd = "c:/workspace/VMConfigTool/devresources/test.bat";
+				Process p = Runtime.getRuntime().exec(cmd);
+
 				br = new BufferedReader(new InputStreamReader(p.getInputStream()));
                 String line = null;
                 while ((line = br.readLine()) != null) {
@@ -67,8 +69,7 @@ import com.minli.web.form.SearchMainForm;
 				taskLog.setTaskStatus(1);
 				try {
 					bof.insertTaskLog(taskLog);
-					TaskLog getLog = bof.getTaskLogById(1000000002L);
-					formModel.setPassword(getLog.getLogData());
+
 					
 					
 					List<TaskLog> taskLogList = bof.getAllTaskLog();
